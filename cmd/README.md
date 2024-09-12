@@ -7,7 +7,7 @@ This program generates release note for volcano automatically, it mostly use `gi
 ```shell
 git clone https://github.com/Monokaix/go-gitlog.git
 
-go run cmd/main.go --start $start commit id --version $release version --project-path $volcano project path
+cd go-gitlog && go run cmd/main.go --start $start commit id --version $release version --project-path $volcano project path
 ```
 
 ### example

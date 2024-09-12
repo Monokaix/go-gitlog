@@ -3,13 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	gitlog "go-gitlog"
 	"log"
 	"os"
 	"regexp"
 	"strings"
 	"text/template"
-
-	"github.com/tsuyoshiwada/go-gitlog"
 )
 
 func init() {
@@ -73,11 +72,15 @@ func main() {
 		if len(matchArr) != 3 {
 			panic(fmt.Errorf("wrong pr format, commit message: %s", commit.Subject))
 		}
-
+		//log.Println("matchArr:", matchArr)
+		//log.Println("matchArr[0]:", matchArr[0])
+		//log.Println("matchArr[1]:", matchArr[1])
+		//log.Println("matchArr[2]:", matchArr[2])
 		// extract real author of github id.
 		parts := strings.Split(matchArr[len(matchArr)-1], "/")
-		if len(parts) != 2 {
-			panic(fmt.Errorf("failed to extract author: %s", matchArr[len(matchArr)-1]))
+		if len(parts) < 2 {
+			log.Printf("Failed to extract author: %s", matchArr[len(matchArr)-1])
+			continue
 		}
 
 		// extract pr sequence
